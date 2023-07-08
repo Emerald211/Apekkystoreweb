@@ -16,11 +16,12 @@ const PaymentConfirmation = () => {
 
   const storedOrder = JSON.parse(localStorage.getItem("completedOrder"));
 
+  if (storedOrder !== null) {
+    setemail(true);
+  }
+
   useEffect(() => {
     const unsubscribe = customOnAUthStateChange((user) => {
-      if (storedOrder !== null) {
-        setemail(true);
-      }
       if (user) {
         console.log("User is authenticated:", user);
 
@@ -42,7 +43,7 @@ const PaymentConfirmation = () => {
           .then(
             () => console.log("User document created/updated successfully"),
             () => {
-              if (email === true) {
+             
                 const completedOrder = {
                   id: storedOrder.id,
                   email: storedOrder.email,
@@ -139,9 +140,6 @@ const PaymentConfirmation = () => {
                 sendPaymentNotificationToSeller();
 
                 alert("Order completed");
-              } else {
-                console.log();
-              }
             },
 
             localStorage.setItem("completedOrder", JSON.stringify(null))
