@@ -24,34 +24,30 @@ const PaymentConfirmation = () => {
     const unsubscribe = customOnAUthStateChange((user) => {
       if (user) {
         console.log("User is authenticated:", user);
-
-        // Fetch the existing user document
+  
         const userDocRef = doc(db, "users", user.uid);
         getDoc(userDocRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
               const existingOrders = docSnapshot.data().orders || [];
-
-              // Update the user document by adding the new order to the existing orders array
+  
               const updatedOrders = [...existingOrders, storedOrder];
               return updateDoc(userDocRef, { orders: updatedOrders });
             } else {
-              // Create a new user document with the order as the first entry in the orders array
               return setDoc(userDocRef, { orders: [storedOrder] });
             }
           })
-          .then(
-            () => console.log("User document created/updated successfully"),
-
-            localStorage.setItem("completedOrder", JSON.stringify(null))
-          )
-          .catch((error) =>
-            console.error("Error creating/updating user document:", error)
-          );
+          .then(() => {
+            console.log("User document created/updated successfully");
+            localStorage.setItem("completedOrder", JSON.stringify(null));
+          })
+          .catch((error) => {
+            console.error("Error creating/updating user document:", error);
+          });
       } else {
         console.log("User is not authenticated");
       }
-
+  
       const sendEmail = () => {
         const completedOrder = {
           id: storedOrder.id,
@@ -67,9 +63,9 @@ const PaymentConfirmation = () => {
           deliverytime: storedOrder.deliverytime,
         };
         console.log(completedOrder);
-
+  
         const products = completedOrder.items;
-
+  
         const productDetails = products.map((product) => {
           return `
             Product: ${product.name}
@@ -78,20 +74,18 @@ const PaymentConfirmation = () => {
             Quantity: ${product.quantity}
           `;
         });
-
+  
         const formattedProductDetails = productDetails.join("\n");
-
-        // To buyer
-
+  
         const sendPaymentConfirmationEmail = () => {
           const templateParams = {
             name: completedOrder.name,
             order_id: completedOrder.id,
             amount: completedOrder.amount,
             paymentMethod: "PAYPAL",
-            items: `${formattedProductDetails}`,
+            items: formattedProductDetails, // Removed unnecessary string interpolation
           };
-
+  
           emailjs
             .send("service_x1xb88n", "template_vswwvhp", templateParams)
             .then((response) => {
@@ -108,13 +102,9 @@ const PaymentConfirmation = () => {
               );
             });
         };
-
+  
         sendPaymentConfirmationEmail();
-
-        // Assuming you have configured EmailJS and initialized it with your User ID
-
-        // Function to send the payment confirmation email to the seller
-
+  
         const sendPaymentNotificationToSeller = () => {
           const templateParams = {
             order_id: completedOrder.id,
@@ -122,12 +112,12 @@ const PaymentConfirmation = () => {
             customerName: completedOrder.name,
             customerEmail: completedOrder.email,
             paymentMethod: "PAYPAL",
-            items: `${formattedProductDetails}`,
+            items: formattedProductDetails, // Removed unnecessary string interpolation
             address: completedOrder.address,
             country: completedOrder.country,
             deliverytime: completedOrder.deliverytime,
           };
-
+  
           emailjs
             .send("service_x1xb88n", "template_csfo85y", templateParams)
             .then((response) => {
@@ -144,18 +134,18 @@ const PaymentConfirmation = () => {
               );
             });
         };
-
-        // Usage example
+  
         sendPaymentNotificationToSeller();
-
+  
         alert("Order completed");
       };
-
+  
       sendEmail();
     });
-
+  
     return () => unsubscribe();
-  }, []);
+  }, []); 
+  
 
   const navigate = useNavigate();
   return (
