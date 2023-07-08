@@ -43,105 +43,103 @@ const PaymentConfirmation = () => {
           .then(
             () => console.log("User document created/updated successfully"),
             () => {
-             
-                const completedOrder = {
-                  id: storedOrder.id,
-                  email: storedOrder.email,
-                  name: storedOrder.name,
-                  items: storedOrder.items,
-                  amount: storedOrder.amount,
-                  status: "COMPLETED",
-                  time: storedOrder.time,
-                  payerid: storedOrder.payerid,
-                  address: storedOrder.address,
-                  country: storedOrder.country,
-                  deliverytime: storedOrder.deliverytime,
-                };
-                console.log(completedOrder);
+              const completedOrder = {
+                id: storedOrder.id,
+                email: storedOrder.email,
+                name: storedOrder.name,
+                items: storedOrder.items,
+                amount: storedOrder.amount,
+                status: "COMPLETED",
+                time: storedOrder.time,
+                payerid: storedOrder.payerid,
+                address: storedOrder.address,
+                country: storedOrder.country,
+                deliverytime: storedOrder.deliverytime,
+              };
+              console.log(completedOrder);
 
-                const products = completedOrder.items;
+              const products = completedOrder.items;
 
-                const productDetails = products.map((product) => {
-                  return `
-                    Product: ${product.name}
-                    Image URL: ${product.imageUrl}
-                    Price: ${product.price} Euros
-                    Quantity: ${product.quantity}
-                  `;
-                });
+              const productDetails = products.map((product) => {
+                return `
+                  Product: ${product.name}
+                  Image URL: ${product.imageUrl}
+                  Price: ${product.price} Euros
+                  Quantity: ${product.quantity}
+                `;
+              });
 
-                const formattedProductDetails = productDetails.join("\n");
+              const formattedProductDetails = productDetails.join("\n");
 
-                // To buyer
+              // To buyer
 
-                const sendPaymentConfirmationEmail = () => {
-                  const templateParams = {
-                    name: completedOrder.name,
-                    order_id: completedOrder.id,
-                    amount: completedOrder.amount,
-                    paymentMethod: "PAYPAL",
-                    items: `${formattedProductDetails}`,
-                  };
-
-                  emailjs
-                    .send("service_x1xb88n", "template_vswwvhp", templateParams)
-                    .then((response) => {
-                      console.log(
-                        "Payment confirmation email sent to the customer:",
-                        response.status,
-                        response.text
-                      );
-                    })
-                    .catch((error) => {
-                      console.error(
-                        "Error sending payment confirmation email to the customer:",
-                        error
-                      );
-                    });
+              const sendPaymentConfirmationEmail = () => {
+                const templateParams = {
+                  name: completedOrder.name,
+                  order_id: completedOrder.id,
+                  amount: completedOrder.amount,
+                  paymentMethod: "PAYPAL",
+                  items: `${formattedProductDetails}`,
                 };
 
-                sendPaymentConfirmationEmail();
+                emailjs
+                  .send("service_x1xb88n", "template_vswwvhp", templateParams)
+                  .then((response) => {
+                    console.log(
+                      "Payment confirmation email sent to the customer:",
+                      response.status,
+                      response.text
+                    );
+                  })
+                  .catch((error) => {
+                    console.error(
+                      "Error sending payment confirmation email to the customer:",
+                      error
+                    );
+                  });
+              };
 
-                // Assuming you have configured EmailJS and initialized it with your User ID
+              sendPaymentConfirmationEmail();
 
-                // Function to send the payment confirmation email to the seller
+              // Assuming you have configured EmailJS and initialized it with your User ID
 
-                const sendPaymentNotificationToSeller = () => {
-                  const templateParams = {
-                    order_id: completedOrder.id,
-                    amount: completedOrder.amount,
-                    customerName: completedOrder.name,
-                    customerEmail: completedOrder.email,
-                    paymentMethod: "PAYPAL",
-                    items: `${formattedProductDetails}`,
-                    address: completedOrder.address,
-                    country: completedOrder.country,
-                    deliverytime: completedOrder.deliverytime,
-                  };
+              // Function to send the payment confirmation email to the seller
 
-                  emailjs
-                    .send("service_x1xb88n", "template_csfo85y", templateParams)
-                    .then((response) => {
-                      console.log(
-                        "Payment notification email sent to the seller:",
-                        response.status,
-                        response.text
-                      );
-                    })
-                    .catch((error) => {
-                      console.error(
-                        "Error sending payment notification email to the seller:",
-                        error
-                      );
-                    });
+              const sendPaymentNotificationToSeller = () => {
+                const templateParams = {
+                  order_id: completedOrder.id,
+                  amount: completedOrder.amount,
+                  customerName: completedOrder.name,
+                  customerEmail: completedOrder.email,
+                  paymentMethod: "PAYPAL",
+                  items: `${formattedProductDetails}`,
+                  address: completedOrder.address,
+                  country: completedOrder.country,
+                  deliverytime: completedOrder.deliverytime,
                 };
 
-                // Usage example
-                sendPaymentNotificationToSeller();
+                emailjs
+                  .send("service_x1xb88n", "template_csfo85y", templateParams)
+                  .then((response) => {
+                    console.log(
+                      "Payment notification email sent to the seller:",
+                      response.status,
+                      response.text
+                    );
+                  })
+                  .catch((error) => {
+                    console.error(
+                      "Error sending payment notification email to the seller:",
+                      error
+                    );
+                  });
+              };
 
-                alert("Order completed");
+              // Usage example
+              sendPaymentNotificationToSeller();
+
+              alert("Order completed");
             },
-
             localStorage.setItem("completedOrder", JSON.stringify(null))
           )
           .catch((error) =>
