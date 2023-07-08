@@ -24,13 +24,13 @@ const PaymentConfirmation = () => {
     const unsubscribe = customOnAUthStateChange((user) => {
       if (user) {
         console.log("User is authenticated:", user);
-  
+
         const userDocRef = doc(db, "users", user.uid);
         getDoc(userDocRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
               const existingOrders = docSnapshot.data().orders || [];
-  
+
               const updatedOrders = [...existingOrders, storedOrder];
               return updateDoc(userDocRef, { orders: updatedOrders });
             } else {
@@ -47,113 +47,114 @@ const PaymentConfirmation = () => {
       } else {
         console.log("User is not authenticated");
       }
-  
-      const sendEmail = () => {
-        const completedOrder = {
-          id: storedOrder.id,
-          email: storedOrder.email,
-          name: storedOrder.name,
-          items: storedOrder.items,
-          amount: storedOrder.amount,
-          status: "COMPLETED",
-          time: storedOrder.time,
-          payerid: storedOrder.payerid,
-          address: storedOrder.address,
-          country: storedOrder.country,
-          deliverytime: storedOrder.deliverytime,
-        };
-        console.log(completedOrder);
-  
-        const products = completedOrder.items;
-  
-        const productDetails = products.map((product) => {
-          return `
-            Product: ${product.name}
-            Image URL: ${product.imageUrl}
-            Price: ${product.price} Euros
-            Quantity: ${product.quantity}
-          `;
-        });
-  
-        const formattedProductDetails = productDetails.join("\n");
-  
-        const sendPaymentConfirmationEmail = () => {
-          const templateParams = {
-            name: completedOrder.name,
-            order_id: completedOrder.id,
-            amount: completedOrder.amount,
-            paymentMethod: "PAYPAL",
-            items: formattedProductDetails, // Removed unnecessary string interpolation
-          };
-  
-          emailjs
-            .send("service_x1xb88n", "template_vswwvhp", templateParams)
-            .then((response) => {
-              console.log(
-                "Payment confirmation email sent to the customer:",
-                response.status,
-                response.text
-              );
-            })
-            .catch((error) => {
-              console.error(
-                "Error sending payment confirmation email to the customer:",
-                error
-              );
-            });
-        };
-  
-        sendPaymentConfirmationEmail();
-  
-        const sendPaymentNotificationToSeller = () => {
-          const templateParams = {
-            order_id: completedOrder.id,
-            amount: completedOrder.amount,
-            customerName: completedOrder.name,
-            customerEmail: completedOrder.email,
-            paymentMethod: "PAYPAL",
-            items: formattedProductDetails, // Removed unnecessary string interpolation
-            address: completedOrder.address,
-            country: completedOrder.country,
-            deliverytime: completedOrder.deliverytime,
-          };
-  
-          emailjs
-            .send("service_x1xb88n", "template_csfo85y", templateParams)
-            .then((response) => {
-              console.log(
-                "Payment notification email sent to the seller:",
-                response.status,
-                response.text
-              );
-            })
-            .catch((error) => {
-              console.error(
-                "Error sending payment notification email to the seller:",
-                error
-              );
-            });
-        };
-  
-        sendPaymentNotificationToSeller();
-  
-        alert("Order completed");
-      };
-  
-      sendEmail();
     });
-  
+
     return () => unsubscribe();
-  }, []); 
-  
+  }, [storedOrder]);
+
+  const sendEmail = () => {
+    const completedOrder = {
+      id: storedOrder.id,
+      email: storedOrder.email,
+      name: storedOrder.name,
+      items: storedOrder.items,
+      amount: storedOrder.amount,
+      status: "COMPLETED",
+      time: storedOrder.time,
+      payerid: storedOrder.payerid,
+      address: storedOrder.address,
+      country: storedOrder.country,
+      deliverytime: storedOrder.deliverytime,
+    };
+    console.log(completedOrder);
+
+    const products = completedOrder.items;
+
+    const productDetails = products.map((product) => {
+      return `
+        Product: ${product.name}
+        Image URL: ${product.imageUrl}
+        Price: ${product.price} Euros
+        Quantity: ${product.quantity}
+      `;
+    });
+
+    const formattedProductDetails = productDetails.join("\n");
+
+    const sendPaymentConfirmationEmail = () => {
+      const templateParams = {
+        name: completedOrder.name,
+        order_id: completedOrder.id,
+        amount: completedOrder.amount,
+        paymentMethod: "PAYPAL",
+        items: formattedProductDetails,
+      };
+
+      emailjs
+        .send("service_x1xb88n", "template_vswwvhp", templateParams)
+        .then((response) => {
+          console.log(
+            "Payment confirmation email sent to the customer:",
+            response.status,
+            response.text
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "Error sending payment confirmation email to the customer:",
+            error
+          );
+        });
+    };
+
+    const sendPaymentNotificationToSeller = () => {
+      const templateParams = {
+        order_id: completedOrder.id,
+        amount: completedOrder.amount,
+        customerName: completedOrder.name,
+        customerEmail: completedOrder.email,
+        paymentMethod: "PAYPAL",
+        items: formattedProductDetails,
+        address: completedOrder.address,
+        country: completedOrder.country,
+        deliverytime: completedOrder.deliverytime,
+      };
+
+      emailjs
+        .send("service_x1xb88n", "template_csfo85y", templateParams)
+        .then((response) => {
+          console.log(
+            "Payment notification email sent to the seller:",
+            response.status,
+            response.text
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "Error sending payment notification email to the seller:",
+            error
+          );
+        });
+    };
+
+    if (storedOrder) {
+      sendPaymentConfirmationEmail();
+      sendPaymentNotificationToSeller();
+      alert("Order completed");
+    }
+  };
+
+  useEffect(() => {
+    sendEmail();
+  }, []);
 
   const navigate = useNavigate();
   return (
-    <div className=" w-screen h-screen flex flex-col justify-center items-center">
-      <BsCheckCircleFill className=" text-main text-[100px] mb-10" />
-      <h1 className=" font-serrat font-bold">Payment Sucessful</h1>
-      <h5 className=" font-serrat text-gray-600 mb-10">
-        Thanks for Purchasing an item with Apekky Store
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
+      <BsCheckCircleFill className="text-main text-[100px] mb-10" />
+      <h1 className="font-serrat font-bold">Payment Successful</h1>
+      <h5 className="font-serrat text-gray-600 mb-10">
+        Thanks for purchasing an item with Apekky Store
       </h5>
 
       <Button onClick={() => navigate("/orders")} buttonType="inverted">
