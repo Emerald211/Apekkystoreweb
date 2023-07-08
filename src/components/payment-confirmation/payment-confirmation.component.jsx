@@ -16,12 +16,11 @@ const PaymentConfirmation = () => {
 
   const storedOrder = JSON.parse(localStorage.getItem("completedOrder"));
 
-  if (storedOrder !== null) {
-    setemail(true);
-  }
-
   useEffect(() => {
     const unsubscribe = customOnAUthStateChange((user) => {
+      if (storedOrder !== null) {
+        setemail(true);
+      }
       if (user) {
         console.log("User is authenticated:", user);
 
