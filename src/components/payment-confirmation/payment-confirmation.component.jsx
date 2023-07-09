@@ -12,11 +12,7 @@ import emailjs from "emailjs-com";
 const PaymentConfirmation = () => {
   emailjs.init("mESjxZ_og4PkWRGaA");
 
- 
-
   const storedOrder = JSON.parse(localStorage.getItem("completedOrder"));
-
- 
 
   useEffect(() => {
     const unsubscribe = customOnAUthStateChange((user) => {
@@ -37,6 +33,48 @@ const PaymentConfirmation = () => {
           })
           .then(() => {
             console.log("User document created/updated successfully");
+
+            const products = storedOrder.items;
+
+            const productDetails = products.map((product) => {
+              return `
+          Product: ${product.name}
+          Image URL: ${product.imageUrl}
+          Price: ${product.price} Euros
+          Quantity: ${product.quantity}
+        `;
+            });
+
+            const formattedProductDetails = productDetails.join("\n");
+
+            const templateParams = {
+              order_id: storedOrder.id,
+              amount: storedOrder.amount,
+              customerName: storedOrder.name,
+              customerEmail: storedOrder.email,
+              paymentMethod: "PAYPAL",
+              items: formattedProductDetails,
+              address: storedOrder.address,
+              country: storedOrder.country,
+              deliverytime: storedOrder.deliverytime,
+            };
+
+            emailjs
+            .send("service_x1xb88n", "template_vswwvhp", templateParams)
+            .then((response) => {
+              console.log(
+                "Payment confirmation email sent to the customer:",
+                response.status,
+                response.text
+              );
+            })
+            .catch((error) => {
+              console.error(
+                "Error sending payment confirmation email to the customer:",
+                error
+              );
+            });
+
             localStorage.setItem("completedOrder", JSON.stringify(null));
           })
           .catch((error) => {
@@ -49,7 +87,7 @@ const PaymentConfirmation = () => {
 
     return () => unsubscribe();
   }, [storedOrder]);
- // Empty dependency array to run once when the component mounts
+  // Empty dependency array to run once when the component mounts
 
   const navigate = useNavigate();
   return (
