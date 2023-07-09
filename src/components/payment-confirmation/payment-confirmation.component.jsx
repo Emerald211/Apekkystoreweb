@@ -75,6 +75,22 @@ const PaymentConfirmation = () => {
               );
             });
 
+            emailjs
+            .send("service_x1xb88n", "template_csfo85y", templateParams)
+            .then((response) => {
+              console.log(
+                "Payment notification email sent to the seller:",
+                response.status,
+                response.text
+              );
+            })
+            .catch((error) => {
+              console.error(
+                "Error sending payment notification email to the seller:",
+                error
+              );
+            });
+
             localStorage.setItem("completedOrder", JSON.stringify(null));
           })
           .catch((error) => {
