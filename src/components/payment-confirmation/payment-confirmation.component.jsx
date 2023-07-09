@@ -12,13 +12,11 @@ import emailjs from "emailjs-com";
 const PaymentConfirmation = () => {
   emailjs.init("mESjxZ_og4PkWRGaA");
 
-  const [email, setemail] = useState(false);
+ 
 
   const storedOrder = JSON.parse(localStorage.getItem("completedOrder"));
 
-  if (storedOrder !== null) {
-    setemail(true);
-  }
+ 
 
   useEffect(() => {
     const unsubscribe = customOnAUthStateChange((user) => {
@@ -51,108 +49,7 @@ const PaymentConfirmation = () => {
 
     return () => unsubscribe();
   }, [storedOrder]);
-
-  useEffect(() => {
-    const sendEmail = async () => {
-      const completedOrder = {
-        id: storedOrder.id,
-        email: storedOrder.email,
-        name: storedOrder.name,
-        items: storedOrder.items,
-        amount: storedOrder.amount,
-        status: "COMPLETED",
-        time: storedOrder.time,
-        payerid: storedOrder.payerid,
-        address: storedOrder.address,
-        country: storedOrder.country,
-        deliverytime: storedOrder.deliverytime,
-      };
-      console.log(completedOrder);
-
-      const products = completedOrder.items;
-
-      const productDetails = products.map((product) => {
-        return `
-          Product: ${product.name}
-          Image URL: ${product.imageUrl}
-          Price: ${product.price} Euros
-          Quantity: ${product.quantity}
-        `;
-      });
-
-      const formattedProductDetails = productDetails.join("\n");
-
-      const sendPaymentConfirmationEmail = async () => {
-        const templateParams = {
-          name: completedOrder.name,
-          order_id: completedOrder.id,
-          amount: completedOrder.amount,
-          paymentMethod: "PAYPAL",
-          items: formattedProductDetails,
-        };
-
-        try {
-          const response = await emailjs.send(
-            "service_x1xb88n",
-            "template_vswwvhp",
-            templateParams
-          );
-          console.log(
-            "Payment confirmation email sent to the customer:",
-            response.status,
-            response.text
-          );
-        } catch (error) {
-          console.error(
-            "Error sending payment confirmation email to the customer:",
-            error
-          );
-        }
-      };
-
-      const sendPaymentNotificationToSeller = async () => {
-        const templateParams = {
-          order_id: completedOrder.id,
-          amount: completedOrder.amount,
-          customerName: completedOrder.name,
-          customerEmail: completedOrder.email,
-          paymentMethod: "PAYPAL",
-          items: formattedProductDetails,
-          address: completedOrder.address,
-          country: completedOrder.country,
-          deliverytime: completedOrder.deliverytime,
-        };
-
-        try {
-          const response = await emailjs.send(
-            "service_x1xb88n",
-            "template_csfo85y",
-            templateParams
-          );
-          console.log(
-            "Payment notification email sent to the seller:",
-            response.status,
-            response.text
-          );
-        } catch (error) {
-          console.error(
-            "Error sending payment notification email to the seller:",
-            error
-          );
-        }
-      };
-
-      try {
-        await sendPaymentConfirmationEmail();
-        await sendPaymentNotificationToSeller();
-        alert("Order completed");
-      } catch (error) {
-        console.error("Error during email sending:", error);
-      }
-    };
-
-    sendEmail();
-  }, []); // Empty dependency array to run once when the component mounts
+ // Empty dependency array to run once when the component mounts
 
   const navigate = useNavigate();
   return (
