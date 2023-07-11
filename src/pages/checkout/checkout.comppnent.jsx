@@ -133,12 +133,14 @@ const Checkout = () => {
                 type="text"
                 {...register("address")}
                 placeholder="Enter Address to deliver to"
+                required
               />
               <select
                 onClick={handleCountryChange}
                 className="border border-main px-3 py-2"
                 name=""
                 {...register("country")}
+                required
                 id=""
               >
                 <option>Select COUNTRY</option>
@@ -150,6 +152,7 @@ const Checkout = () => {
                 className="border border-main px-3 py-2"
                 name=""
                 {...register("deliverytime")}
+                required
                 id=""
               >
                 <option>Select Delivery Time</option>
@@ -166,7 +169,7 @@ const Checkout = () => {
               )}
 
               <Button buttonType="inverted">
-                {submited ? "PROCEED TO PAYMENT" : "SUBMIT"}
+                {submited ? "SUBMITTED SUCESSFULLY.." : "SUBMIT"}
               </Button>
             </form>
             <h1 className=" mb-4">Payment Method</h1>

@@ -23,7 +23,7 @@ const PayButton = () => {
   return (
     <>
       <button
-        className="bg-black px-3 py-2 text-white font-bold"
+        className="bg-black px-3 py-2 text-white mb-8 font-bold"
         onClick={() => handleCheckout()}
       >
         PROCEED TO PAYMENT

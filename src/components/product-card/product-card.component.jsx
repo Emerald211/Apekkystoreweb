@@ -1,27 +1,16 @@
 import { BsCurrencyEuro } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector";
-import { addItemToCart } from "../../store/cart/cart.action";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const ProductCard = ({ products }) => {
-  const [itemsAdd, setItemsAdd] = useState(false);
 
-  const dispatch = useDispatch();
 
   const navigate = useNavigate()
 
   // eslint-disable-next-line react/prop-types
   const { name, imageUrl, price, id } = products;
 
-  const cartItem = useSelector(selectCartItems);
-
-  const addToCartHandler = () => {
-    setItemsAdd(true);
-    dispatch(addItemToCart(cartItem, products));
-  };
   return (
     <div>
       <div onClick={() => navigate(`/shop/description/${id}`)} className="w-full max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-white dark:border-gray-700">
@@ -99,22 +88,14 @@ const ProductCard = ({ products }) => {
               {price}
             </span>
 
-            {itemsAdd ? (
+            
               <a
                 href="#"
-                className="text-white bg-black hover:bg-pink font-serrat focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[10px] lg:text-[5px] md:text-sm px-1 md:px-5 py-2.5 text-center "
+                className="text-white bg-black hover:bg-pink font-serrat focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[10px] lg:text-[15px] md:text-sm px-1 md:px-5 py-2.5 text-center "
               >
-                Added
+                View
               </a>
-            ) : (
-              <a
-                href="#"
-                className="text-white bg-main hover:bg-black font-serrat focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[10px] lg:text-[5px] md:text-sm px-1 md:px-5 py-2.5 text-center "
-                onClick={addToCartHandler}
-              >
-                Add to cart
-              </a>
-            )}
+            
           </div>
         </div>
       </div>
