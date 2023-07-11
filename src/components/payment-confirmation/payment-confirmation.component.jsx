@@ -50,8 +50,8 @@ const PaymentConfirmation = () => {
             const templateParams = {
               order_id: storedOrder.id,
               amount: storedOrder.amount,
-              customerName: storedOrder.name,
-              customerEmail: storedOrder.email,
+              name: storedOrder.name,
+              email: storedOrder.email,
               paymentMethod: "PAYPAL",
               items: formattedProductDetails,
               address: storedOrder.address,
@@ -60,7 +60,7 @@ const PaymentConfirmation = () => {
             };
 
             emailjs
-            .send("service_x1xb88n", "template_vswwvhp", templateParams)
+            .send("service_i6p2vio", "template_ldsq2mp", templateParams)
             .then((response) => {
               console.log(
                 "Payment confirmation email sent to the customer:",
@@ -76,7 +76,7 @@ const PaymentConfirmation = () => {
             });
 
             emailjs
-            .send("service_x1xb88n", "template_csfo85y", templateParams)
+            .send("service_i6p2vio", "template_xd7o7ln", templateParams)
             .then((response) => {
               console.log(
                 "Payment notification email sent to the seller:",
