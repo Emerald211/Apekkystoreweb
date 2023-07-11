@@ -148,7 +148,7 @@ const Checkout = () => {
                 <option value="OTHER COUNTRIES">OTHER COUNTRIES</option>
               </select>
               <select
-                onClick={handleChange}
+                onChange={handleChange}
                 className="border border-main px-3 py-2"
                 name=""
                 {...register("deliverytime")}
