@@ -10,7 +10,7 @@ import { getDoc, doc, updateDoc, setDoc } from "firebase/firestore";
 import emailjs from "emailjs-com";
 
 const PaymentConfirmation = () => {
-  emailjs.init("mESjxZ_og4PkWRGaA");
+  emailjs.init("XsySrC4c9cJg5z0LS");
 
   const storedOrder = JSON.parse(localStorage.getItem("completedOrder"));
 
