@@ -51,11 +51,11 @@ const Checkout = () => {
 
     setFormData(data);
 
-  
     setSubmitted(true);
 
     function generateRandomId(length) {
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       let id = "";
       for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
@@ -63,10 +63,9 @@ const Checkout = () => {
       }
       return id;
     }
-    
+
     // Example usage:
     const randomId = generateRandomId(8);
-
 
     const completedOrder = {
       id: randomId,
@@ -157,10 +156,15 @@ const Checkout = () => {
               >
                 <option>Select Delivery Time</option>
                 {country === "UK" && (
-                  <option value="Next Working Day">Next Working Day</option>
+                  <>
+                    <option value="Next Working Day">Next Working Day</option>
+                    <option value="Between 14 Days">Between 14 Days</option>
+                  </>
                 )}
 
-                <option value="Between 14 Days">Between 14 Days</option>
+                {country === "OTHER COUNTRIES" && (
+                  <option value="Between 14 Days">Between 14 Days</option>
+                )}
               </select>
               {selectedValue === "Next Working Day" && (
                 <p className=" text-sm flex items-center text-red-500">
@@ -301,7 +305,6 @@ const Checkout = () => {
 
             {/* <StripContainer formData={formData} /> */}
             <PayButton />
-       
           </div>
         </div>
       ) : (
