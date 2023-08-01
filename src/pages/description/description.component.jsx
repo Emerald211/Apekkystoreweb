@@ -63,6 +63,7 @@ const Description = () => {
             <img
               className="p-8 rounded-t-lg"
               src={imageUrl}
+    
               alt="product image"
             />
           </a>
