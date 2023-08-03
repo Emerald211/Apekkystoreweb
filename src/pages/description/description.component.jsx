@@ -60,14 +60,17 @@ const Description = () => {
 
         <div className=" flex flex-col justify-center items-center rounded-lg shadow dark:bg-white dark:border-gray-700">
           <a href="#">
+            <div style={{ backgroundImage: `url(${imageUrl})`}} className=" h-[90vh] w-[90vw] object-cover bg-center bg-no-repeat"></div>
+          </a>
+          {/* <a href="#">
             <img
               className="p-8 rounded-t-lg"
               src={imageUrl}
     
               alt="product image"
             />
-          </a>
-          <div className="px-5 lg:px-24 pb-5">
+          </a> */}
+          <div className="px-5 mt-8 lg:px-24 pb-5">
             <a href="#">
               <h5 className=" text-sm md:text-xl font-semibold font-serrat tracking-tight text-gray-900 ">
                 {name}
