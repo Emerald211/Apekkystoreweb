@@ -13,7 +13,7 @@ const CategoryPreview = ({ title, products }) => {
         </Link>
       </h2>
 
-      <div className="grid mt-8 gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid mt-8 gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {products
           .filter((_, idx) => idx < 4)
           .map((product) => {
