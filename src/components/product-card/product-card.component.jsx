@@ -13,7 +13,7 @@ const ProductCard = ({ products }) => {
 
   return (
     <div>
-      <div onClick={() => navigate(`/shop/description/${id}`)} className="w-full max-w-sm  border border-gray-200 rounded-lg shadow dark:bg-white dark:border-gray-700">
+      <div onClick={() => navigate(`/shop/description/${id}`)} className="w-full max-w-sm  border border-purple-600 rounded-lg shadow dark:bg-white dark:border-purple-600">
         <a href="#">
           <img
             className="p-8 rounded-t-lg"
@@ -23,7 +23,7 @@ const ProductCard = ({ products }) => {
         </a>
         <div className="px-5 pb-5">
           <a href="#">
-            <h5 className=" text-sm md:text-xl font-semibold font-serrat tracking-tight text-gray-900 ">
+            <h5 className=" text-sm md:text-xl font-semibold font-serrat tracking-tight text-main ">
               {name}
             </h5>
           </a>
@@ -83,7 +83,7 @@ const ProductCard = ({ products }) => {
             </span>
           </div>
           <div className="flex gap-3 flex-col lg:flex-row lg:justify-between">
-            <span className=" text-sm md:text-3xl flex items-center font-serrat font-bold text-gray-900 ">
+            <span className=" text-sm md:text-3xl  flex items-center font-serrat font-bold text-white ">
               <BsCurrencyEuro />
               {price}
             </span>
@@ -91,7 +91,7 @@ const ProductCard = ({ products }) => {
             
               <a
                 href="#"
-                className="text-white bg-black hover:bg-pink font-serrat focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[10px] lg:text-[15px] md:text-sm px-1 md:px-5 py-2.5 text-center "
+                className="text-white bg-main hover:bg-pink font-serrat focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[10px] lg:text-[15px] md:text-sm px-1 md:px-5 py-2.5 text-center "
               >
                 View
               </a>

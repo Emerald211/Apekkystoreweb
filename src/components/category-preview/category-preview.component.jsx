@@ -6,7 +6,7 @@ import {GrFormNext} from 'react-icons/gr'
 // eslint-disable-next-line react/prop-types
 const CategoryPreview = ({ title, products }) => {
   return (
-    <div className="category-preview-container px-5 md:px-12 mt-12">
+    <div className="category-preview-container bg-black px-5 md:px-12 mt-12">
       <h2>
         <Link className="title flex items-center font-serrat" to={title}>
           {title.toUpperCase()} <GrFormNext />
