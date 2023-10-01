@@ -13,8 +13,8 @@ const PopularCategories = () => {
         </div>
       </div>
 
-      <div className=" mt-20 flex justify-center items-center">
-        <div className=" grid grid-cols-2 lg:grid-cols-4 gap-5  md:gap-10">
+      <div className=" mt-20 flex justify-center py-4 bg-black items-center">
+        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5  md:gap-10">
           <div   onClick={() => navigate("/shop/bathing spa")} className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
             <img
               src="https://i.ibb.co/jh8W8k8/category1.jpg"

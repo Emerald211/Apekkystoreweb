@@ -20,12 +20,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_DEV_FIREBASE_APIKEY,
+  apiKey: "AIzaSyD-YYfey22bBbKW2XH0-3xBK_s_S8H51cU",
   authDomain: "apeekystore.firebaseapp.com",
   projectId: "apeekystore",
   storageBucket: "apeekystore.appspot.com",
-  messagingSenderId: import.meta.env.VITE_DEV_FIREBASE_SENDER_ID,
-  appId: import.meta.env.VITE_DEV_FIREBASE_APP_ID,
+  messagingSenderId: "931576996551",
+  appId: "1:931576996551:web:46d241ebae546d879f14e2"
 };
 
 const app = initializeApp(firebaseConfig);
