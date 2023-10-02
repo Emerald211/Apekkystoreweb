@@ -32,7 +32,7 @@ const Sections = () => {
           {section.toLocaleUpperCase()}
         </h2>
 
-        <div className=" section-container grid grid-cols-2 lg:grid-cols-4">
+        <div className=" section-container grid grid-cols-1 lg:grid-cols-4">
           {product &&
             product.map((eachproduct) => (
               <ProductCard key={eachproduct.id} products={eachproduct} />
