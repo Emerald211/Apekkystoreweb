@@ -22,13 +22,13 @@ const Sections = () => {
   }, [section, categoriesMap]);
 
   return (
-    <Fragment>
+    <div className=" bg-black py-3">
       <div className=" px-4 md:px-12">
         <div onClick={() =>  navigate("/shop")} className=" flex items-center text-xl text-main gap-3 mt-6 font-serrat">
           <BsArrowLeftCircle />
           <h1>Go Back</h1>
       </div>
-        <h2 className="section-title font-serrat mt-4 md:mt-24">
+        <h2 className="section-title text-main font-serrat mt-4 md:mt-24">
           {section.toLocaleUpperCase()}
         </h2>
 
@@ -39,7 +39,7 @@ const Sections = () => {
             ))}
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

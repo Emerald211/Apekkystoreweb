@@ -13,9 +13,9 @@ const PopularCategories = () => {
         </div>
       </div>
 
-      <div className=" mt-20 flex justify-center py-5 bg-black items-center">
-        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5  md:gap-10">
-          <div   onClick={() => navigate("/shop/bathing spa")} className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
+      <div className=" mt-20 flex justify-center py-5 items-center">
+        <div className=" grid grid-cols-2 lg:grid-cols-4 gap-5  md:gap-10">
+          <div  className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
             <img
               src="https://i.ibb.co/jh8W8k8/category1.jpg"
               className=""
@@ -27,7 +27,7 @@ const PopularCategories = () => {
           </div>
 
           <div
-            onClick={() => navigate("/shop/body cream")}
+            
             className=" border border-main bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white "
           >
             <div className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
@@ -42,7 +42,7 @@ const PopularCategories = () => {
             </div>
           </div>
 
-          <div                 onClick={() => navigate("/shop/body lotion")} className=" border border-main bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white ">
+          <div                className=" border border-main bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white ">
             <div className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
               <img
                 src="https://i.ibb.co/ZKfx1V5/category3.jpg"
@@ -56,7 +56,7 @@ const PopularCategories = () => {
           </div>
 
           <div
-            onClick={() => navigate("/shop/serums")}
+           
             className=" bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white "
           >
             <div className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">

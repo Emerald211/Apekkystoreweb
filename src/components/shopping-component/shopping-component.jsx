@@ -32,7 +32,7 @@ const ShoppingComponent = () => {
 
 
 
-      <Fragment>
+      <div className=" bg-black py-5 mt-2">
         {Object.keys(categoriesMap).map((title) => {
           const products = categoriesMap[title];
 
@@ -41,7 +41,7 @@ const ShoppingComponent = () => {
             <CategoryPreview key={title} products={products} title={title} />
           );
         })}
-      </Fragment>
+      </div>
     </div>
   );
 };

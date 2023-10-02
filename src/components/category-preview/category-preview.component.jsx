@@ -8,8 +8,8 @@ const CategoryPreview = ({ title, products }) => {
   return (
     <div className="category-preview-container bg-black px-5 md:px-12 mt-12">
       <h2>
-        <Link className="title flex items-center font-serrat" to={title}>
-          {title.toUpperCase()} <GrFormNext />
+        <Link className="title text-white underline flex items-center font-serrat" to={title}>
+          {title.toUpperCase()} <GrFormNext className=" text-white" />
         </Link>
       </h2>
 
