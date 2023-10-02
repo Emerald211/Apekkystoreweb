@@ -13,7 +13,7 @@ const ProductCard = ({ products }) => {
 
   return (
     <div>
-      <div onClick={() => navigate(`/shop/description/${id}`)} className="w-full max-w-sm  border border-purple-600 rounded-lg shadow dark:bg-white dark:border-purple-600">
+      <div onClick={() => navigate(`/shop/description/${id}`)} className="w-full max-w-sm  border border-purple-600 rounded-lg shadow dark:border-purple-600">
         <a href="#">
           <img
             className="p-8 rounded-t-lg"
