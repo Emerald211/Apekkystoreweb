@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { selectCategoriesMap } from "../../store/categories/category.selector";
 import { selectCartItems } from "../../store/cart/cart.selector";
-import { BsCurrencyEuro } from "react-icons/bs";
+import { BsCurrencyPound } from "react-icons/bs";
 import { addItemToCart } from "../../store/cart/cart.action";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { useState } from "react";
@@ -147,7 +147,7 @@ const Description = () => {
             </div>
             <div className="flex gap-3 flex-col lg:flex-row lg:justify-between">
               <span className=" text-sm md:text-3xl flex items-center font-serrat font-bold text-gray-900 ">
-                <BsCurrencyEuro />
+                <BsCurrencyPound />
                 {price}
               </span>
 

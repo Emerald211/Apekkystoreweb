@@ -1,4 +1,4 @@
-import { BsCurrencyEuro } from "react-icons/bs";
+import { BsCurrencyPound } from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 
@@ -84,7 +84,7 @@ const ProductCard = ({ products }) => {
           </div>
           <div className="flex gap-3 flex-col lg:flex-row lg:justify-between">
             <span className=" text-sm md:text-3xl  flex items-center font-serrat font-bold text-white ">
-              <BsCurrencyEuro />
+              <BsCurrencyPound />
               {price}
             </span>
 

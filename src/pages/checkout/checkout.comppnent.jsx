@@ -117,7 +117,7 @@ const Checkout = () => {
           })}
 
           <span className="total font-serrat flex items-center">
-            Total: <BsCurrencyEuro />
+            Total: <BsCurrencyPound />
             {cartTotal}
           </span>
 

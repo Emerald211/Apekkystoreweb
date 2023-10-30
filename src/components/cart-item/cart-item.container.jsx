@@ -1,4 +1,4 @@
-import { BsCurrencyEuro } from "react-icons/bs";
+import { BsCurrencyPound } from "react-icons/bs";
 import "./cart-item.styles.scss";
 
 // import React from "react";
@@ -14,7 +14,7 @@ const CartItem = ({ cartItem }) => {
       <div className=" item-details">
         <span className="name">{name}</span>
         <span className="price flex items-center">
-          {quantity} x <BsCurrencyEuro />{price}
+          {quantity} x <BsCurrencyPound />{price}
         </span>
       </div>
     </div>
