@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { PaystackButton } from "react-paystack"
+
 import {
   selectCartItems,
   selectCartTotal,
@@ -20,14 +22,19 @@ import PaymentForm from "../../components/payment-form/payment-form.component";
 import StripContainer from "../../components/stripe-container/stripeContainer.component";
 import PayButton from "../../components/pay-button/payButton.component";
 
+
 const Checkout = () => {
   const cartItem = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
   const currentuser = useSelector(selectCurrentUser);
 
+  const publicKey = "pk_test_fb59388796c0aacc4979c718eac130656df09539"
+
   emailjs.init("mESjxZ_og4PkWRGaA");
 
   const dispatch = useDispatch();
+
+  console.log(currentuser.email);
 
   const [formData, setFormData] = useState({});
   const [selectedValue, setSelectedValue] = useState("");
@@ -46,6 +53,21 @@ const Checkout = () => {
 
   const { register, handleSubmit, res } = useForm();
 
+
+  const componentProps = {
+    email: currentuser.email,
+    amount: Math.round(cartTotal) * 100000,
+    metadata: {
+      name: currentuser.name,
+      phone: '07016788892',
+    },
+    publicKey,
+    text: "Pay Now",
+    onSuccess: () =>
+      alert("Thanks for doing business with us! Come back soon!!"),
+    onClose: () => alert("Wait! Don't leave :("),
+  }
+
   const onSubmitAction = async (data) => {
     console.log("___FORM_DATA___,", data);
 
@@ -63,6 +85,10 @@ const Checkout = () => {
       }
       return id;
     }
+
+    // Pay with Paystack
+
+ 
 
     // Example usage:
     const randomId = generateRandomId(8);
@@ -305,6 +331,8 @@ const Checkout = () => {
 
             {/* <StripContainer formData={formData} /> */}
             <PayButton />
+
+            <PaystackButton {...componentProps} />
           </div>
         </div>
       ) : (
