@@ -62,7 +62,7 @@ const Checkout = () => {
       phone: '07016788892',
     },
     publicKey,
-    text: "Pay Now",
+    text: "Pay With Paystack",
     onSuccess: () =>
       alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! Don't leave :("),
@@ -332,7 +332,7 @@ const Checkout = () => {
             {/* <StripContainer formData={formData} /> */}
             <PayButton />
 
-            <PaystackButton {...componentProps} />
+            <PaystackButton className=" bg-blue-400 text-white font-serrat px-5 py-3" {...componentProps} />
           </div>
         </div>
       ) : (
