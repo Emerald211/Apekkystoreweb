@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../product-card/product-card.component";
 import "./category-preview.styles.scss";
-import {GrFormNext} from 'react-icons/gr'
+import { FaChevronRight } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
 const CategoryPreview = ({ title, products }) => {
@@ -9,7 +9,7 @@ const CategoryPreview = ({ title, products }) => {
     <div className="category-preview-container bg-black px-5 md:px-12 mt-12">
       <h2>
         <Link className="title text-white underline flex items-center font-serrat" to={title}>
-          {title.toUpperCase()} <GrFormNext className=" text-white" />
+          {title.toUpperCase()} <FaChevronRight className=" ml-1" />
         </Link>
       </h2>
 
