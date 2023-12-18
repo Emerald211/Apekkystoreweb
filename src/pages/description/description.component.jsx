@@ -5,7 +5,7 @@ import { selectCartItems } from "../../store/cart/cart.selector";
 import { BsCurrencyPound } from "react-icons/bs";
 import { addItemToCart } from "../../store/cart/cart.action";
 import { BsArrowLeftCircle } from "react-icons/bs";
-import { useState } from "react";
+import { useState} from "react";
 
 const Description = () => {
   const { id } = useParams();
@@ -13,7 +13,12 @@ const Description = () => {
   const [itemsAdd, setItemsAdd] = useState(false);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+
+
+
+  
+  // xjj
 
   const cartItem = useSelector(selectCartItems);
 

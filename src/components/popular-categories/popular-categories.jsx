@@ -55,8 +55,11 @@ const PopularCategories = () => {
             </div>
           </div>
 
+          
+
+
           <div
-            onClick={() => navigate("/shop/serums")}
+            onClick={() => navigate("/shop/serum")}
             className=" bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white "
           >
             <div className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
@@ -81,6 +84,33 @@ const PopularCategories = () => {
                 SHOP NOW
               </Button>
             </div> */}
+          </div>
+
+          <div
+            onClick={() => navigate("/shop/body oil")}
+            className=" border border-main bg-cover w-[150px] h-[150px] md:w-[300px] md:h-[300px] flex flex-col justify-center items-center text-white "
+          >
+            <div className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
+              <img
+                src="https://i.ibb.co/41zRqvG/category2.jpg"
+                className=""
+                alt=""
+              />
+              <h2 className=" text-main text-sm mt-3 md:text-base font-bold">
+                BODY OIL
+              </h2>
+            </div>
+          </div>
+
+          <div   onClick={() => navigate("/shop/body scrub")} className=" px-5 border-purple-500  text-center bg-cover  border w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] flex flex-col justify-center items-center text-white ">
+            <img
+              src="https://i.ibb.co/jh8W8k8/category1.jpg"
+              className=""
+              alt=""
+            />
+            <h2 className=" text-main text-sm mt-3 md:text-base font-bold">
+              BODY SCRUB
+            </h2>
           </div>
         </div>
       </div>
